@@ -49,5 +49,43 @@ while True:
     except ValueError:
         print("Invalid input. Please try again.")
         
-        
+    --------------------------
+Bai 3
+
+import pandas as pd
+
+# Read the data from the Excel file
+df = pd.read_excel("workorders.xlsx")
+
+# Print the column names
+print(df.columns)
+
+# chuyen doi ngay thang
+df['ReqDate'] = pd.to_datetime(df['ReqDate'])
+df['WorkDate'] = pd.to_datetime(df['WorkDate'])
+
+# tinh cot wait
+df['Wait'] = (df['WorkDate'] - df['ReqDate']).dt.days
+
+# Doc du lieu
+print(df['Doc dữ liệu vào DataFrame'].unique())
+
+# xem du lieu thieu
+print(df['Xem thông tin dữ liệu: dữ liệu có bao nhiêu thuộc tính, bao nhiêu quan sát, có dữ liệu khuyết hay không?'].unique())
+
+# dem cac loai service
+print(df['Lọc dữ liệu để xem có bao nhiêu loại dịch vụ (Service) khác nhau được cung cấp, và là những loại nào?'].unique())
+
+# Tinh LbrCost
+df['LbrCost'] = df['LbrHrs'] * df['LbrRate']
+
+# Tinh 'TotalCost' va 'TotalFee' 
+df['TotalCost'] = df['LbrCost'] + df['PartsCost']
+df['TotalFee'] = df['LbrCost'] + df['PartsFee']
+
+# Filter the data based on the instructions
+filtered_df = df[df['File excel "workorders.xlsx"'] == 'workorders.xlsx']
+
+# Print the filtered data
+print(filtered_df)
        
